@@ -29,7 +29,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 ## Project Structure
 
 ```text
-.
+
 ├── README.md
 ├── architecture.dot            # Graphviz source for architecture diagram
 ├── aws_architecture_diagram.png # Rendered architecture diagram
