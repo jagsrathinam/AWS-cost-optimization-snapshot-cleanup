@@ -34,7 +34,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 ## Project Structure
 
 ```text
-.
+
 ├── README.md
 ├── aws_architecture_diagram.png # Rendered architecture diagram
 ├── iam_policy.json             # Minimal IAM policy for Lambda Execution Role
@@ -82,43 +82,67 @@ Note: Ensure the Trust Relationship on the IAM Role allows lambda.amazonaws.com 
 Deployment Steps
 Step 1: Deploy the Discoverer Lambda Function
 Open the AWS Lambda Console and click Create function.
+
 Name the function snapshot-cleanup-discoverer.
+
 Choose runtime Python 3.11 (or higher).
+
 Assign the SnapshotCleanupLambdaRole created above.
+
 Paste the code from src/discoverer_lambda.py.
+
 Step 2: Deploy the Worker Lambda Function
 Create a second Lambda function named snapshot-cleanup-worker.
+
 Choose runtime Python 3.11 (or higher).
+
 Assign the SnapshotCleanupLambdaRole.
+
 Paste the code from src/worker_lambda.py.
+
 Configure Environment Variables under Configuration -> Environment variables:
+
 DRY_RUN: true (set to false when ready to perform actual deletions)
+
 DAYS_THRESHOLD: 30
+
 Adjust the function timeout to 5 minutes under General configuration.
+
 Step 3: Configure AWS Step Functions
 Open the AWS Step Functions Console and click Create state machine.
+
 Choose Blank or Code editor.
+
 Import step_function_definition.json and replace the Lambda function ARNs with your deployed ARNs.
+
 Enable Distributed Map mode with MaxConcurrency: 10.
+
 Save the State Machine as SnapshotCleanupOrchestrator.
+
 Scheduling via Amazon EventBridge
 Automate execution by attaching a scheduled cron rule:
+
 Open the Amazon EventBridge Console and select Rules -> Create rule.
+
 Name the rule weekly-snapshot-cleanup-schedule.
+
 Set Rule Type to Schedule.
+
 Define a Cron Expression (e.g., run every Sunday at midnight UTC):
-Plaintext
+
 cron(0 0 ? * SUN *)
 
-
 Set the Target to Step Functions State Machine and select SnapshotCleanupOrchestrator.
+
 Save and enable the rule.
+
 Verification & Testing
 Run an initial manual execution of the Step Functions State Machine with DRY_RUN = true.
+
 Review Amazon CloudWatch Logs for snapshot-cleanup-worker to inspect candidate snapshots marked for deletion:
-Plaintext
+
 [DRY-RUN] Would delete snapshot snap-0123456789abcdef0 in us-east-1 (Age: 42 days)
 
-
 Once verified, update the DRY_RUN environment variable to false for automated production cleanup.
+
 
