@@ -25,39 +25,6 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 
 ---
 
-## IAM Permissions & Policy
-
-Create an IAM Role for the Lambda functions (e.g., `SnapshotCleanupLambdaRole`) with the following minimal privilege policy attached:
-
-### `iam_policy.json`
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "EC2SnapshotReadDeletePermissions",
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeRegions",
-        "ec2:DescribeSnapshots",
-        "ec2:DeleteSnapshot"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "CloudWatchLoggingPermissions",
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*"
-    }
-  ]
-}
-
 ## Project Structure
 
 ```text
@@ -71,37 +38,3 @@ Create an IAM Role for the Lambda functions (e.g., `SnapshotCleanupLambdaRole`) 
 │   └── worker_lambda.py        # Scans and deletes stale snapshots per region
 └── step_function_definition.json # Step Functions State Machine definition
 
----
-
-## IAM Permissions & Policy
-
-Create an IAM Role for the Lambda functions (e.g., `SnapshotCleanupLambdaRole`) with the following minimal privilege policy attached:
-
-### `iam_policy.json`
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "EC2SnapshotReadDeletePermissions",
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeRegions",
-        "ec2:DescribeSnapshots",
-        "ec2:DeleteSnapshot"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "CloudWatchLoggingPermissions",
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*"
-    }
-  ]
-}
