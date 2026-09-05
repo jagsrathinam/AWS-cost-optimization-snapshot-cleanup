@@ -1,5 +1,6 @@
 # AWS Multi-Region Resilient EBS Snapshot Cleanup
 
+![AWS Architecture](aws_architecture_diagram.png)
 
 An enterprise-ready, serverless FinOps solution designed to safely scan, identify, and delete orphaned EBS snapshots older than 30 days across multiple AWS regions without hitting AWS API throttling limits (`RequestLimitExceeded`).
 
@@ -27,9 +28,13 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 
 ## Project Structure
 
+```text
+.
 ├── README.md
-├── iam_policy.json               # Minimal IAM policy for Lambda Execution Role
-├── step_function_definition.json # Step Functions State Machine definition
-└── src/
-    ├── discoverer_lambda.py      # Fetches active AWS regions
-    └── worker_lambda.py          # Scans and deletes stale snapshots per region
+├── architecture.dot            # Graphviz source for architecture diagram
+├── aws_architecture_diagram.png # Rendered architecture diagram
+├── iam_policy.json             # Minimal IAM policy for Lambda Execution Role
+├── src/
+│   ├── discoverer_lambda.py    # Fetches active AWS regions
+│   └── worker_lambda.py        # Scans and deletes stale snapshots per region
+└── step_function_definition.json # Step Functions State Machine definition
