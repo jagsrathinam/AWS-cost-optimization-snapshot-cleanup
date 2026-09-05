@@ -38,7 +38,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 │   └── worker_lambda.py        # Scans and deletes stale snapshots per region
 └── step_function_definition.json # Step Functions State Machine definition
 
+---
+
 ## IAM Permissions & Policy
-
-
-
+Create an IAM Role for the Lambda functions (e.g., SnapshotCleanupLambdaRole) with the following minimal privilege policy attached:
