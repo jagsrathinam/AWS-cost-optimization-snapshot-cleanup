@@ -39,10 +39,12 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 └── step_function_definition.json # Step Functions State Machine definition
 
 ## IAM Permissions & Policy
+
 Create an IAM Role for the Lambda functions (e.g., SnapshotCleanupLambdaRole) with the following minimal privilege policy attached:
 
 iam_policy.json
-JSON
+
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -68,4 +70,5 @@ JSON
     }
   ]
 }
+```
 
