@@ -44,12 +44,12 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 └── step_function_definition.json # Step Functions State Machine definition
 
 
-IAM Permissions & Policy
+## IAM Permissions & Policy
 Create an IAM Role for the Lambda functions (e.g., SnapshotCleanupLambdaRole) with the following minimal privilege policy attached:
 iam_policy.json
 
 
-
+```text
 JSON
 {
   "Version": "2012-10-17",
@@ -79,7 +79,7 @@ JSON
 
 
 Note: Ensure the Trust Relationship on the IAM Role allows lambda.amazonaws.com to assume the role.
-Deployment Steps
+## Deployment Steps
 Step 1: Deploy the Discoverer Lambda Function
 Open the AWS Lambda Console and click Create function.
 
