@@ -44,7 +44,7 @@ Create an IAM Role for the Lambda functions (e.g., SnapshotCleanupLambdaRole) wi
 
 iam_policy.json
 
-```json
+```text
 {
   "Version": "2012-10-17",
   "Statement": [
