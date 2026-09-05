@@ -1,6 +1,5 @@
 # AWS Multi-Region Resilient EBS Snapshot Cleanup
 
-![AWS Architecture](aws_architecture_diagram.png)
 
 An enterprise-ready, serverless FinOps solution designed to safely scan, identify, and delete orphaned EBS snapshots older than 30 days across multiple AWS regions without hitting AWS API throttling limits (`RequestLimitExceeded`).
 
