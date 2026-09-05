@@ -58,6 +58,7 @@ Create an IAM Role for the Lambda functions (e.g., `SnapshotCleanupLambdaRole`) 
   ]
 }
 
+---
 
 ## Project Structure
 
