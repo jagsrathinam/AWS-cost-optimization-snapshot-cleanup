@@ -1,0 +1,35 @@
+{
+  "Comment": "Orchestrates multi-region EBS snapshot cleanup with concurrency limits",
+  "StartAt": "DiscoverRegions",
+  "States": {
+    "DiscoverRegions": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:123456789012:function:snapshot-cleanup-discoverer",
+      "ResultPath": "$.discovery",
+      "Next": "ProcessRegionsDistributedMap"
+    },
+    "ProcessRegionsDistributedMap": {
+      "Type": "Map",
+      "ItemProcessor": {
+        "ProcessorConfig": {
+          "Mode": "DISTRIBUTED",
+          "ExecutionType": "STANDARD"
+        },
+        "StartAt": "DeleteStaleSnapshots",
+        "States": {
+          "DeleteStaleSnapshots": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:123456789012:function:snapshot-cleanup-worker",
+            "Parameters": {
+              "region.$": "$"
+            },
+            "End": true
+          }
+        }
+      },
+      "ItemsPath": "$.discovery.regions",
+      "MaxConcurrency": 5,
+      "End": true
+    }
+  }
+}
