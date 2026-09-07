@@ -14,7 +14,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 
 ---
 
-## Architecture Overview and the flow
+## Architecture Overview and flow
 
 1. **Amazon EventBridge:** Fires a cron event (e.g., weekly) to trigger the cleanup workflow.
 2. **Region Discoverer Lambda:** Queries EC2 to retrieve all active, enabled AWS regions in the account.
@@ -28,7 +28,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 ## Project Structure
 
 ```text
-.
+
 ├── README.md
 ├── architecture.dot            # Graphviz source for architecture diagram
 ├── aws_architecture_diagram.png # Rendered architecture diagram
@@ -132,6 +132,4 @@ Automate execution by attaching a scheduled cron rule:
    ```
 3. Once verified, update the `DRY_RUN` environment variable to `false` for automated production cleanup.
 ---
-## AWS Architecture Diagram
 
-![AWS Architecture Diagram](aws_architecture_diagram.png)
