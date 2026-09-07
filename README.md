@@ -14,7 +14,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 
 ---
 
-## Architecture Overview
+## Architecture Overview and the flow
 
 1. **Amazon EventBridge:** Fires a cron event (e.g., weekly) to trigger the cleanup workflow.
 2. **Region Discoverer Lambda:** Queries EC2 to retrieve all active, enabled AWS regions in the account.
@@ -22,6 +22,7 @@ An enterprise-ready, serverless FinOps solution designed to safely scan, identif
 4. **Parallel Worker Lambdas:** Fetches regional snapshots via paginated requests, checks age thresholds (>30 days), and deletes expired snapshots using adaptive retries and pacing delays.
 5. **Amazon CloudWatch:** Collects detailed logs and metric summaries for auditing and compliance tracking.
 
+![AWS Architecture](aws_architecture_diagram.png)
 ---
 
 ## Project Structure
